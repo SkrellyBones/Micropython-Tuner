@@ -22,7 +22,7 @@ unispace = XglcdFont("fonts/Unispace12x24.c", 12, 24)
 saved_notes = []  # empty list to store saved notes from button press
 sw = Switch()  # USR button
 HOLD_TIME_THRESHOLD = 2000  # threshold in ms for long press on button
-# if you see a comment that is like #pylint disable=foo thats for my linter on my IDE dw about it
+
 
 
 def sample(pin, buff, sample_rate):
@@ -42,7 +42,7 @@ def sample(pin, buff, sample_rate):
     return signal
 
 
-# pylint: disable=too-few-public-methods
+
 class FrequencyFinder:
     """
     A class for detecting the dominant frequency of an audio signal
@@ -64,7 +64,7 @@ class FrequencyFinder:
         """
         self.sample_rate = sample_rate
 
-    # pylint: disable=too-many-locals
+  
     def find_frequency(self, signal):
         """
         Takes a signal and returns the frequency of the signal.
@@ -165,7 +165,7 @@ class DrawStaff:
         It will initialize where middle C is on the y axis
         It will return top_line, line_spacing, and middle_c as variables if
         assigned"""
-        lcd.fill_rectangle(1, 1, 239, 319, color565(255, 255, 255))  # wh bckgroun
+        lcd.fill_rectangle(1, 1, 239, 319, color565(255, 255, 255))  # wh background
         r = (line_spacing) // 2
         j = 0  # line being drawn
         bottom_line = top_line + line_spacing * 10
@@ -298,7 +298,7 @@ def sharp(note_name):
     return note_name, is_sharp, original  # these will be used in place_note
 
 
-# pylint: disable=too-many-arguments
+
 def place_note(
     radius, y, line_spacing, bottom_line, top, is_sharp, new_name, note_name, X=120
 ):
@@ -370,7 +370,7 @@ def check_touchscreen():
 
 Analyzer = AudioAnalyzer(16000)
 buffer = bytearray(4096)
-TOP_LINE = 90  # symbolic constants from C :O can I have an autograph?
+TOP_LINE = 90 
 LINE_SPACING = 14
 draw_staff = DrawStaff(TOP_LINE, LINE_SPACING)
 while True:
@@ -387,7 +387,7 @@ while True:
     place_note(
         r, y, line_spacing, bottom_line, top, is_sharp, original, notename
     )  # we gotta calculate the y position for each new note
-    start = time.ticks_ms()  # this is the most caveman interrupt you have ever seen
+    start = time.ticks_ms()  
     while time.ticks_diff(time.ticks_ms(), start) < 2000:  # check the timer every cycle
         if sw():  # user pressed USER button
             press_start = pyb.millis()  # record start time
@@ -396,11 +396,12 @@ while True:
                 press_duration = pyb.millis() - press_start
             if (
                 press_duration >= HOLD_TIME_THRESHOLD
-            ):  # THATS RIGHT BABY WE HAVE STATIC NON-BLOCKING INTERRUPTS
+            ):  
                 saved_notes.clear()
                 print("Saved Notes Cleared")
             else:
-                saved_notes.append((freq, note1))  # WOOOOO
+                saved_notes.append((freq, note1)) 
                 print("Saved:", note1)
         check_touchscreen()  # blocking interrupt for playback, makes sense to pause here
         time.sleep_ms(20)  # give the poor cpu a break
+
