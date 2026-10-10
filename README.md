@@ -9,7 +9,7 @@ xfglcd_font.py - Font data in X-GLCD format. from rdagger https://github.com/rda
 
 main.py - main function for use on board.
 
-STM32FFT.py - same as main function, but with comments and docstrings explaining how everything works!
+STM32FFT.py - same as main function, but with comments and docstrings explaining how everything works! (This is because on the SMT32F4 the space requirements with this project were so tight that the spaced saved from not including these lines was significant)
 
 
 In order to use the ulab library, you must include it in micropython and then build micropython with ulab from source, as the STM32F4 is not a standard platform. More information can be found at https://github.com/v923z/micropython-ulab
